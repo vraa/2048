@@ -8,7 +8,10 @@ define([ 'jquery', 'underscore', 'backbone', 'view/GameView', 'model/tiles',
 
 		events : {
 			'click #random' : 'random',
-			'click #right' : 'moveRight'
+			'click #right' : 'moveRight',
+			'click #left' : 'moveLeft',
+			'click #up' : 'moveUp',
+			'click #down' : 'moveDown'
 		},
 
 		initialize : function() {
@@ -47,6 +50,21 @@ define([ 'jquery', 'underscore', 'backbone', 'view/GameView', 'model/tiles',
 		moveRight : function(evt) {
 			evt.preventDefault();
 			Backbone.trigger('game:move', 'r');
+		},
+
+		moveLeft : function(evt) {
+			evt.preventDefault();
+			Backbone.trigger('game:move', 'l');
+		},
+
+		moveUp : function(evt) {
+			evt.preventDefault();
+			Backbone.trigger('game:move', 'u');
+		},
+
+		moveDown : function(evt) {
+			evt.preventDefault();
+			Backbone.trigger('game:move', 'd');
 		}
 
 	});

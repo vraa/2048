@@ -33,7 +33,7 @@ define([ 'jquery', 'underscore', 'backbone', 'model/tiles', 'model/tile',
 		} ] ],
 		initialize : function() {
 			_.bindAll(this, 'start', 'randomTile', 'randomNumber', 'move',
-					'moveRight');
+					'moveRight', 'moveLeft', 'moveUp', 'moveDown');
 			Backbone.on('game:start', this.start);
 			Backbone.on('game:move', this.move);
 		},
@@ -64,9 +64,13 @@ define([ 'jquery', 'underscore', 'backbone', 'model/tiles', 'model/tile',
 
 		move : function(dir) {
 			var moves = {
-				'r' : this.moveRight
+				'r' : this.moveRight,
+				'l' : this.moveLeft,
+				'u' : this.moveUp,
+				'd' : this.moveDown
 			};
 			moves[dir]();
+			this.randomTile();
 		},
 
 		moveRight : function() {
@@ -79,6 +83,51 @@ define([ 'jquery', 'underscore', 'backbone', 'model/tiles', 'model/tile',
 					var tile = tiles[i];
 					if (tile.get('value') != 0) {
 						this.collection.moveToFarRight(tile);
+					}
+				}
+			}
+		},
+
+		moveLeft : function() {
+			var j;
+			for (j = 1; j < 4; j++) {
+				var tiles = this.collection.where({
+					y : j
+				});
+				for (var i = 0; i < tiles.length; i++) {
+					var tile = tiles[i];
+					if (tile.get('value') != 0) {
+						this.collection.moveToFarLeft(tile);
+					}
+				}
+			}
+		},
+
+		moveUp : function() {
+			var i;
+			for (i = 1; i < 4; i++) {
+				var tiles = this.collection.where({
+					x : i
+				});
+				for (var j = 0; j < tiles.length; j++) {
+					var tile = tiles[j];
+					if (tile.get('value') != 0) {
+						this.collection.moveToFarUp(tile);
+					}
+				}
+			}
+		},
+
+		moveDown : function() {
+			var i;
+			for (i = 3; i >= 0; i--) {
+				var tiles = this.collection.where({
+					x : i
+				});
+				for (var j = 0; j < tiles.length; j++) {
+					var tile = tiles[j];
+					if (tile.get('value') != 0) {
+						this.collection.moveToFarDown(tile);
 					}
 				}
 			}
