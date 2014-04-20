@@ -6,6 +6,10 @@ body {
 	text-align: center;
 }
 
+a, a:hover, a:active, a:link, a:visited{
+	color:#776E65;
+}
+
 .game {
 	margin: 0 auto;
 	background-color: #CDC0B4;
@@ -329,3 +333,45 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
   -webkit-animation-name: pulse;
   animation-name: pulse;
 }
+
+header{
+	margin:0 auto;
+	width:524px;
+	overflow:hidden;
+	margin-top:50px;
+}
+	header .site-info, header .control-panel{
+		float:left;
+	}
+	header .site-info{
+		text-align:left;
+		width:70%;
+	}
+		.site-info h1{
+			font-size:3rem;
+			margin:0;
+			padding:0;
+		}
+		.site-info h2{
+			font-size:1.7rem;
+			margin:0;
+			padding:0;
+		}
+	header .control-panel{
+		width:30%;
+	}
+.content{
+	width:524px;
+	margin:30px auto 0 auto;
+	text-align: left;
+}
+	.content p{
+		font-size:1rem;
+		line-height:2rem;
+		margin:30px 0;
+	}
+	.content .how-to{
+		border-bottom:1px solid #D8D4D0;
+	}
+
+	
