@@ -11,12 +11,12 @@ require.config({
 			exports : '_'
 		},
 		'backbone' : {
-			deps : ['underscore', 'jquery'],
+			deps : [ 'underscore', 'jquery' ],
 			exports : 'Backbone'
 		}
 	}
 });
 
-require(['view/application'], function(ApplicationView){
+require([ 'view/application' ], function(ApplicationView) {
 	new ApplicationView();
 });

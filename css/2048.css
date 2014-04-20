@@ -1,0 +1,81 @@
+body {
+	background-color: #FAF8EF;
+	color: #776E65;
+	font-size: 1rem;
+	font-family: Arial, Sans;
+	text-align: center;
+}
+
+.game {
+	margin: 0 auto;
+	background-color:#BBADA0;
+	width:500px;
+	border-radius:5px;
+}
+
+.game .row {
+	overflow:hidden;
+}
+
+.game .tile {
+	float:left;
+	width:100px;
+	height:100px;
+	background-color:#CDC0B4;
+	margin:10px;
+	border-radius:3px;
+	position:relative;
+}
+	.game .tile.empty .wrap{
+		display:none;
+	}
+	.game .row:first-child .tile{
+		margin-top:20px;
+	}
+	.game .row:last-child .tile{
+		margin-bottom:20px;
+	}
+	.game .row .tile:first-child{
+		margin-left:20px;
+	}
+	.game .row .tile:last-child{
+		margin-right:20px;
+	}
+.game .wrap{
+	width:100%;
+	height:100%;
+	position:relative;
+}
+	.game label{
+		position:absolute;
+		top:10px;
+		left:50%;
+		transform:translateX(-50%);
+		font-weight:bold;
+	}
+	.game label.xl{
+		font-size:2.8rem;
+	}
+	.game label.l{
+		font-size:2.5rem;
+	}
+	.game label.m{
+		font-size:2.3rem;
+	}
+	.game label.s{
+		font-size:1.7rem;
+	}
+	.game .symbols{
+		width:100%;
+		list-style:none;
+		padding:0;
+		margin:0;
+		font-size:.81rem;
+		position:absolute;
+		bottom:10px;
+		left:50%;
+		transform:translateX(-50%);
+	}
+		.game .symbols li{
+			display:inline-block;
+		}
