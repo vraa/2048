@@ -11,7 +11,7 @@ define([ 'backbone', 'model/symbols', 'model/symbol' ], function(Backbone,
 				},
 
 				empty : function() {
-					this.set('symbols', new Symbols());
+					this.set('symbols', new Symbols(), {silent:true});
 					this.set('value', this.get('symbols').sum());
 				},
 
