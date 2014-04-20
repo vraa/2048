@@ -4,14 +4,17 @@ define([ 'jquery', 'underscore', 'backbone', 'view/GameView', 'model/tiles',
 
 	var ApplicationView = Backbone.View.extend({
 
-		el : '.app',
+		el : 'body',
+
+		keyMaps : {
+			'38' : 'u',
+			'40' : 'd',
+			'37' : 'l',
+			'39' : 'r'
+		},
 
 		events : {
-			'click #random' : 'random',
-			'click #right' : 'moveRight',
-			'click #left' : 'moveLeft',
-			'click #up' : 'moveUp',
-			'click #down' : 'moveDown'
+			'keydown' : 'handleKey'
 		},
 
 		initialize : function() {
@@ -23,7 +26,7 @@ define([ 'jquery', 'underscore', 'backbone', 'view/GameView', 'model/tiles',
 				collection : this.seedData()
 			});
 			this.$el.find('.pad').empty().append(this.gameView.render().$el);
-			Backbone.trigger('game:start');
+			this.gameView.start();
 		},
 
 		seedData : function() {
@@ -42,29 +45,12 @@ define([ 'jquery', 'underscore', 'backbone', 'view/GameView', 'model/tiles',
 			return tiles;
 		},
 
-		random : function(evt) {
-			evt.preventDefault();
-			this.gameView.randomTile();
-		},
-
-		moveRight : function(evt) {
-			evt.preventDefault();
-			Backbone.trigger('game:move', 'r');
-		},
-
-		moveLeft : function(evt) {
-			evt.preventDefault();
-			Backbone.trigger('game:move', 'l');
-		},
-
-		moveUp : function(evt) {
-			evt.preventDefault();
-			Backbone.trigger('game:move', 'u');
-		},
-
-		moveDown : function(evt) {
-			evt.preventDefault();
-			Backbone.trigger('game:move', 'd');
+		handleKey : function(evt) {
+			var mapped = this.keyMaps[evt.which];
+			if (mapped) {
+				evt.preventDefault();
+				this.gameView.move(mapped);
+			}
 		}
 
 	});

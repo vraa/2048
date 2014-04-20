@@ -35,7 +35,6 @@ define([ 'jquery', 'underscore', 'backbone', 'model/tiles', 'model/tile',
 			_.bindAll(this, 'start', 'randomTile', 'randomNumber', 'move',
 					'moveRight', 'moveLeft', 'moveUp', 'moveDown');
 			Backbone.on('game:start', this.start);
-			Backbone.on('game:move', this.move);
 		},
 
 		render : function() {
