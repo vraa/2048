@@ -10,26 +10,38 @@ define([ 'jquery', 'underscore', 'backbone', 'model/tiles', 'model/tile',
 			name : 'circle',
 			value : 2
 		} ], [ {
-			name : 'circle',
-			value : 4
-		} ], [ {
-			name : 'circle',
-			value : 8
-		} ], [ {
-			name : 'circle',
-			value : 4
-		}, {
 			name : 'star',
-			value : 4
-		} ], [ {
-			name : 'star',
-			value : 4
-		} ], [ {
-			name : 'star',
-			value : 8
+			value : 2
 		} ], [ {
 			name : 'heart',
-			value : 8
+			value : 2
+		} ], [ {
+			name : 'circle',
+			value : 2
+		} ], [ {
+			name : 'star',
+			value : 2
+		} ], [ {
+			name : 'heart',
+			value : 2
+		} ], [ {
+			name : 'circle',
+			value : 2
+		}, {
+			name : 'star',
+			value : 2
+		} ], [ {
+			name : 'circle',
+			value : 2
+		}, {
+			name : 'heart',
+			value : 2
+		} ], [ {
+			name : 'star',
+			value : 2
+		}, {
+			name : 'heart',
+			value : 2
 		} ] ],
 		initialize : function() {
 			_.bindAll(this, 'start', 'randomTile', 'randomNumber', 'move',
@@ -68,7 +80,7 @@ define([ 'jquery', 'underscore', 'backbone', 'model/tiles', 'model/tile',
 				'u' : this.moveUp,
 				'd' : this.moveDown
 			};
-			if(moves[dir]()){
+			if (moves[dir]()) {
 				this.randomTile();
 			}
 		},
