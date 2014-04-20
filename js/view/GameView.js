@@ -166,6 +166,7 @@ define([ 'jquery', 'underscore', 'backbone', 'model/tiles', 'model/tile',
 				value : symbols.sum(),
 				symbols : symbols
 			});
+			chosenTile.trigger('appear');
 		},
 
 		randomNumber : function(min, max) {

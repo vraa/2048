@@ -16,6 +16,7 @@ define([ 'backbone', 'model/symbols', 'model/symbol' ], function(Backbone,
 				},
 
 				merge : function(oTile) {
+					var origVal = this.get('value');
 					var oSymbols = oTile.get('symbols'), symbols = this
 							.get('symbols'), matchedSymbol;
 					for (var i = 0; i < oSymbols.length; i++) {
@@ -36,6 +37,9 @@ define([ 'backbone', 'model/symbols', 'model/symbol' ], function(Backbone,
 						}
 					}
 					this.set('value', this.get('symbols').sum());
+					if(origVal != 0){
+						this.trigger('merge');
+					}
 					oTile.empty();
 				},
 

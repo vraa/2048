@@ -10,6 +10,8 @@ define([ 'jquery', 'underscore', 'backbone', 'model/tile', 'view/SymbolView',
 
 		initialize : function() {
 			this.listenTo(this.model, 'change', this.render);
+			this.listenTo(this.model, 'appear', this.appear);
+			this.listenTo(this.model, 'merge', this.merge);
 		},
 
 		render : function() {
@@ -25,7 +27,16 @@ define([ 'jquery', 'underscore', 'backbone', 'model/tile', 'view/SymbolView',
 			}else{
 				this.$el.removeClass('empty');
 			}
+			this.$el.removeClass('animated grow pulse');
 			return this;
+		},
+		
+		appear : function(){
+			this.$el.addClass('animated grow');
+		},
+		
+		merge : function(){
+			this.$el.addClass('animated pulse');
 		}
 	});
 
