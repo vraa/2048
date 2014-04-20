@@ -3,6 +3,20 @@ define([ 'backbone', 'model/tile' ], function(Backbone, Tile) {
 	var Tiles = Backbone.Collection.extend({
 		model : Tile,
 
+		mergeTile : function(tile, nonEmptyTile, emptyTile) {
+			var isMerged = false;
+			if (nonEmptyTile != null && nonEmptyTile.canMerge(tile)) {
+				nonEmptyTile.merge(tile);
+				isMerged = true;
+			} else if (emptyTile != null) {
+				emptyTile.merge(tile);
+				isMerged = true;
+			} else {
+				// no matching tile to merge.
+			}
+			return isMerged;
+		},
+
 		moveToFarRight : function(tile) {
 			var firstNonEmptyTile = null, farEmptyTile = null, j, i, nxtTile;
 			i = tile.get('x');
@@ -28,13 +42,7 @@ define([ 'backbone', 'model/tile' ], function(Backbone, Tile) {
 					break;
 				}
 			}
-
-			if (firstNonEmptyTile != null && firstNonEmptyTile.canMerge(tile)) {
-				firstNonEmptyTile.merge(tile);
-			} else if (farEmptyTile != null) {
-				farEmptyTile.merge(tile);
-			}
-
+			return this.mergeTile(tile, firstNonEmptyTile, farEmptyTile);
 		},
 
 		moveToFarLeft : function(tile) {
@@ -63,11 +71,7 @@ define([ 'backbone', 'model/tile' ], function(Backbone, Tile) {
 				}
 			}
 
-			if (firstNonEmptyTile != null && firstNonEmptyTile.canMerge(tile)) {
-				firstNonEmptyTile.merge(tile);
-			} else if (farEmptyTile != null) {
-				farEmptyTile.merge(tile);
-			}
+			return this.mergeTile(tile, firstNonEmptyTile, farEmptyTile);
 		},
 
 		moveToFarUp : function(tile) {
@@ -96,11 +100,7 @@ define([ 'backbone', 'model/tile' ], function(Backbone, Tile) {
 				}
 			}
 
-			if (firstNonEmptyTile != null && firstNonEmptyTile.canMerge(tile)) {
-				firstNonEmptyTile.merge(tile);
-			} else if (farEmptyTile != null) {
-				farEmptyTile.merge(tile);
-			}
+			return this.mergeTile(tile, firstNonEmptyTile, farEmptyTile);
 		},
 
 		moveToFarDown : function(tile) {
@@ -129,11 +129,7 @@ define([ 'backbone', 'model/tile' ], function(Backbone, Tile) {
 				}
 			}
 
-			if (firstNonEmptyTile != null && firstNonEmptyTile.canMerge(tile)) {
-				firstNonEmptyTile.merge(tile);
-			} else if (farEmptyTile != null) {
-				farEmptyTile.merge(tile);
-			}
+			return this.mergeTile(tile, firstNonEmptyTile, farEmptyTile);
 		}
 	});
 

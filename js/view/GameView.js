@@ -69,12 +69,13 @@ define([ 'jquery', 'underscore', 'backbone', 'model/tiles', 'model/tile',
 				'u' : this.moveUp,
 				'd' : this.moveDown
 			};
-			moves[dir]();
-			this.randomTile();
+			if(moves[dir]()){
+				this.randomTile();
+			}
 		},
 
 		moveRight : function() {
-			var j;
+			var j, isMoved = false;
 			for (j = 2; j >= 0; j--) {
 				var tiles = this.collection.where({
 					y : j
@@ -82,14 +83,17 @@ define([ 'jquery', 'underscore', 'backbone', 'model/tiles', 'model/tile',
 				for (var i = 0; i < tiles.length; i++) {
 					var tile = tiles[i];
 					if (tile.get('value') != 0) {
-						this.collection.moveToFarRight(tile);
+						if (this.collection.moveToFarRight(tile)) {
+							isMoved = true;
+						}
 					}
 				}
 			}
+			return isMoved;
 		},
 
 		moveLeft : function() {
-			var j;
+			var j, isMoved = false;
 			for (j = 1; j < 4; j++) {
 				var tiles = this.collection.where({
 					y : j
@@ -97,14 +101,17 @@ define([ 'jquery', 'underscore', 'backbone', 'model/tiles', 'model/tile',
 				for (var i = 0; i < tiles.length; i++) {
 					var tile = tiles[i];
 					if (tile.get('value') != 0) {
-						this.collection.moveToFarLeft(tile);
+						if (this.collection.moveToFarLeft(tile)) {
+							isMoved = true;
+						}
 					}
 				}
 			}
+			return isMoved;
 		},
 
 		moveUp : function() {
-			var i;
+			var i, isMoved = false;
 			for (i = 1; i < 4; i++) {
 				var tiles = this.collection.where({
 					x : i
@@ -112,14 +119,17 @@ define([ 'jquery', 'underscore', 'backbone', 'model/tiles', 'model/tile',
 				for (var j = 0; j < tiles.length; j++) {
 					var tile = tiles[j];
 					if (tile.get('value') != 0) {
-						this.collection.moveToFarUp(tile);
+						if (this.collection.moveToFarUp(tile)) {
+							isMoved = true;
+						}
 					}
 				}
 			}
+			return isMoved;
 		},
 
 		moveDown : function() {
-			var i;
+			var i, isMoved = false;
 			for (i = 3; i >= 0; i--) {
 				var tiles = this.collection.where({
 					x : i
@@ -127,10 +137,13 @@ define([ 'jquery', 'underscore', 'backbone', 'model/tiles', 'model/tile',
 				for (var j = 0; j < tiles.length; j++) {
 					var tile = tiles[j];
 					if (tile.get('value') != 0) {
-						this.collection.moveToFarDown(tile);
+						if (this.collection.moveToFarDown(tile)) {
+							isMoved = true;
+						}
 					}
 				}
 			}
+			return isMoved;
 		},
 
 		randomTile : function() {
