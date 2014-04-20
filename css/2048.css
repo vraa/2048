@@ -11,6 +11,7 @@ body {
 	background-color: #BBADA0;
 	width: 500px;
 	border-radius: 5px;
+	position:relative;
 }
 
 .game .row {
@@ -45,6 +46,12 @@ body {
 
 .game .row .tile:last-child {
 	margin-right: 20px;
+}
+
+.game .tile.ninja{
+	position:absolute;
+	top:0;
+	left:0;
 }
 
 .game .wrap {

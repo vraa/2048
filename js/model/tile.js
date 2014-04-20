@@ -11,7 +11,9 @@ define([ 'backbone', 'model/symbols', 'model/symbol' ], function(Backbone,
 				},
 
 				empty : function() {
-					this.set('symbols', new Symbols(), {silent:true});
+					this.set('symbols', new Symbols(), {
+						silent : true
+					});
 					this.set('value', this.get('symbols').sum());
 				},
 
@@ -37,10 +39,13 @@ define([ 'backbone', 'model/symbols', 'model/symbol' ], function(Backbone,
 						}
 					}
 					this.set('value', this.get('symbols').sum());
-					if(origVal != 0){
+					if (origVal != 0) {
 						this.trigger('merge');
 					}
-					oTile.empty();
+					oTile.trigger('translate', {
+						x : this.get('x'),
+						y : this.get('y')
+					});
 				},
 
 				canMerge : function(oTile) {
