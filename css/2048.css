@@ -8,8 +8,8 @@ body {
 
 .game {
 	margin: 0 auto;
-	background-color: #BBADA0;
-	width: 500px;
+	background-color: #CDC0B4;
+	width: 524px;
 	border-radius: 5px;
 	position:relative;
 }
@@ -22,11 +22,166 @@ body {
 	float: left;
 	width: 100px;
 	height: 100px;
-	background-color: #CDC0B4;
+	background-color: #EEE4DA;
 	margin: 10px;
 	border-radius: 3px;
 	position: relative;
+	border:3px solid #EEE4DA;
 }
+	.tile.can-merge{
+		box-shadow:0 0 10px #aaa;
+		background: rgb(255,255,255); /* Old browsers */
+background: -moz-radial-gradient(center, ellipse cover,  rgba(255,255,255,1) 0%, rgba(238,228,218,1) 100%); /* FF3.6+ */
+background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(255,255,255,1)), color-stop(100%,rgba(238,228,218,1))); /* Chrome,Safari4+ */
+background: -webkit-radial-gradient(center, ellipse cover,  rgba(255,255,255,1) 0%,rgba(238,228,218,1) 100%); /* Chrome10+,Safari5.1+ */
+background: -o-radial-gradient(center, ellipse cover,  rgba(255,255,255,1) 0%,rgba(238,228,218,1) 100%); /* Opera 12+ */
+background: -ms-radial-gradient(center, ellipse cover,  rgba(255,255,255,1) 0%,rgba(238,228,218,1) 100%); /* IE10+ */
+background: radial-gradient(ellipse at center,  rgba(255,255,255,1) 0%,rgba(238,228,218,1) 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#eee4da',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+		
+	}
+	.tile[data-value="2"][data-edge-t="1"]{
+		border-top-color:#1DD2AF;
+	}
+	.tile[data-value="2"][data-edge-b="1"]{
+		border-bottom-color:#1DD2AF;
+	}
+	.tile[data-value="2"][data-edge-l="1"]{
+		border-left-color:#1DD2AF;
+	}
+	.tile[data-value="2"][data-edge-r="1"]{
+		border-right-color:#1DD2AF;
+	}
+	
+	.tile[data-value="4"][data-edge-t="1"]{
+		border-top-color:#19B698;
+	}
+	.tile[data-value="4"][data-edge-b="1"]{
+		border-bottom-color:#19B698;
+	}
+	.tile[data-value="4"][data-edge-l="1"]{
+		border-left-color:#19B698;
+	}
+	.tile[data-value="4"][data-edge-r="1"]{
+		border-right-color:#19B698;
+	}
+	
+	.tile[data-value="8"][data-edge-t="1"]{
+		border-top-color:#F1C40F;
+	}
+	.tile[data-value="8"][data-edge-b="1"]{
+		border-bottom-color:#F1C40F;
+	}
+	.tile[data-value="8"][data-edge-l="1"]{
+		border-left-color:#F1C40F;
+	}
+	.tile[data-value="8"][data-edge-r="1"]{
+		border-right-color:#F1C40F;
+	}
+	
+	.tile[data-value="16"][data-edge-t="1"]{
+		border-top-color:#F4A62A;
+	}
+	.tile[data-value="16"][data-edge-b="1"]{
+		border-bottom-color:#F4A62A;
+	}
+	.tile[data-value="16"][data-edge-l="1"]{
+		border-left-color:#F4A62A;
+	}
+	.tile[data-value="16"][data-edge-r="1"]{
+		border-right-color:#F4A62A;
+	}
+	
+	.tile[data-value="32"][data-edge-t="1"]{
+		border-top-color:#2ECC71;
+	}
+	.tile[data-value="32"][data-edge-b="1"]{
+		border-bottom-color:#2ECC71;
+	}
+	.tile[data-value="32"][data-edge-l="1"]{
+		border-left-color:#2ECC71;
+	}
+	.tile[data-value="32"][data-edge-r="1"]{
+		border-right-color:#2ECC71;
+	}
+	
+	.tile[data-value="64"][data-edge-t="1"]{
+		border-top-color:#27AE60;
+	}
+	.tile[data-value="64"][data-edge-b="1"]{
+		border-bottom-color:#27AE60;
+	}
+	.tile[data-value="64"][data-edge-l="1"]{
+		border-left-color:#27AE60;
+	}
+	.tile[data-value="64"][data-edge-r="1"]{
+		border-right-color:#27AE60;
+	}
+	
+	.tile[data-value="128"][data-edge-t="1"]{
+		border-top-color:#E88834;
+	}
+	.tile[data-value="128"][data-edge-b="1"]{
+		border-bottom-color:#E88834;
+	}
+	.tile[data-value="128"][data-edge-l="1"]{
+		border-left-color:#E88834;
+	}
+	.tile[data-value="128"][data-edge-r="1"]{
+		border-right-color:#E88834;
+	}
+	
+	.tile[data-value="256"][data-edge-t="1"]{
+		border-top-color:#EC5E00;
+	}
+	.tile[data-value="256"][data-edge-b="1"]{
+		border-bottom-color:#EC5E00;
+	}
+	.tile[data-value="256"][data-edge-l="1"]{
+		border-left-color:#EC5E00;
+	}
+	.tile[data-value="256"][data-edge-r="1"]{
+		border-right-color:#EC5E00;
+	}
+	
+	.tile[data-value="512"][data-edge-t="1"]{
+		border-top-color:#3498DB;
+	}
+	.tile[data-value="512"][data-edge-b="1"]{
+		border-bottom-color:#3498DB;
+	}
+	.tile[data-value="512"][data-edge-l="1"]{
+		border-left-color:#3498DB;
+	}
+	.tile[data-value="512"][data-edge-r="1"]{
+		border-right-color:#3498DB;
+	}
+	
+	.tile[data-value="1024"][data-edge-t="1"]{
+		border-top-color:#2980B9;
+	}
+	.tile[data-value="1024"][data-edge-b="1"]{
+		border-bottom-color:#2980B9;
+	}
+	.tile[data-value="1024"][data-edge-l="1"]{
+		border-left-color:#2980B9;
+	}
+	.tile[data-value="1024"][data-edge-r="1"]{
+		border-right-color:#2980B9;
+	}
+	
+	.tile[data-value="2048"][data-edge-t="1"]{
+		border-top-color:#E74C3C;
+	}
+	.tile[data-value="2048"][data-edge-b="1"]{
+		border-bottom-color:#E74C3C;
+	}
+	.tile[data-value="2048"][data-edge-l="1"]{
+		border-left-color:#E74C3C;
+	}
+	.tile[data-value="2048"][data-edge-r="1"]{
+		border-right-color:#E74C3C;
+	}
 
 .game .tile.empty .wrap {
 	display: none;
@@ -48,11 +203,6 @@ body {
 	margin-right: 20px;
 }
 
-.game .tile.ninja{
-	position:absolute;
-	top:0;
-	left:0;
-}
 
 .game .wrap {
 	width: 100%;

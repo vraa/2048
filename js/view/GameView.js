@@ -18,10 +18,19 @@ define([ 'jquery', 'underscore', 'backbone', 'model/tiles', 'model/tile',
 		} ], [ {
 			name : 'circle',
 			value : 2
-		} ], [ {
+		}, {
 			name : 'star',
 			value : 2
 		} ], [ {
+			name : 'circle',
+			value : 2
+		}, {
+			name : 'heart',
+			value : 2
+		} ], [ {
+			name : 'star',
+			value : 2
+		}, {
 			name : 'heart',
 			value : 2
 		} ], [ {
@@ -45,7 +54,8 @@ define([ 'jquery', 'underscore', 'backbone', 'model/tiles', 'model/tile',
 		} ] ],
 		initialize : function() {
 			_.bindAll(this, 'start', 'randomTile', 'randomNumber', 'move',
-					'moveRight', 'moveLeft', 'moveUp', 'moveDown');
+					'moveRight', 'moveLeft', 'moveUp', 'moveDown',
+					'highlightEdges');
 			Backbone.on('game:start', this.start);
 		},
 
@@ -71,6 +81,7 @@ define([ 'jquery', 'underscore', 'backbone', 'model/tiles', 'model/tile',
 		start : function() {
 			this.randomTile();
 			this.randomTile();
+			this.highlightEdges();
 		},
 
 		move : function(dir) {
@@ -82,6 +93,7 @@ define([ 'jquery', 'underscore', 'backbone', 'model/tiles', 'model/tile',
 			};
 			if (moves[dir]()) {
 				this.randomTile();
+				this.highlightEdges();
 			}
 		},
 
@@ -155,6 +167,15 @@ define([ 'jquery', 'underscore', 'backbone', 'model/tiles', 'model/tile',
 				}
 			}
 			return isMoved;
+		},
+
+		highlightEdges : function() {
+			var nonEmptyTiles = this.collection.filter(function(tile) {
+				return tile.get('value') != 0;
+			});
+			for (var i = 0; i < nonEmptyTiles.length; i++) {
+				this.collection.detectEdges(nonEmptyTiles[i]);
+			}
 		},
 
 		randomTile : function() {

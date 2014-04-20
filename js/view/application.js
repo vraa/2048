@@ -37,7 +37,8 @@ define([ 'jquery', 'underscore', 'backbone', 'view/GameView', 'model/tiles',
 						x : i,
 						y : j,
 						value : 0,
-						symbols : new Symbols()
+						symbols : new Symbols(),
+						edges : []
 					});
 					tiles.add(tile);
 				}

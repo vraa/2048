@@ -7,11 +7,15 @@ define([ 'backbone', 'model/symbols', 'model/symbol' ], function(Backbone,
 				defaults : {
 					value : 0,
 					x : 0,
-					y : 0
+					y : 0,
+					edges : []
 				},
 
 				empty : function() {
 					this.set('symbols', new Symbols(), {
+						silent : true
+					});
+					this.set('edges', [], {
 						silent : true
 					});
 					this.set('value', this.get('symbols').sum());
