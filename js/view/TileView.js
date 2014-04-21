@@ -19,6 +19,7 @@ define(
 						},
 
 						render : function() {
+							
 							this.$el.html(this.template(this.model.toJSON()));
 							if (this.model.get('value') != 0) {
 								this.$el.find('.wrap').append(new SymbolView({
@@ -27,14 +28,13 @@ define(
 							}
 
 							if (this.model.get('value') == 0) {
-								this.$el.addClass('empty');
+								this.$el.addClass('empty').removeClass('non-empty');
 							} else {
-								this.$el.removeClass('empty');
+								this.$el.removeClass('empty').addClass('non-empty');
 							}
 							var edges = this.model.get('edges');
 							this.$el.attr({
-								'data-x' : this.model.get('x'),
-								'data-y' : this.model.get('y')
+								'data-xy' : this.model.get('x') + '-' + this.model.get('y')
 							});
 							if (this.model.get('value') != 0) {
 								this.$el
@@ -65,34 +65,18 @@ define(
 						},
 
 						appear : function() {
-							this.$el.addClass('animated grow');
+							this.$el.find('.wrap').addClass('animated grow');
 						},
 
 						merge : function() {
-							this.$el.addClass('animated pulse');
+							console.log('merged');
+							this.$el.find('.wrap').addClass('animated pulse');
 						},
 
 						translate : function(to) {
-							this.model.empty();
-							return;
-							var toTileElm = $('.tile[data-x="' + to.x
-									+ '"][data-y="' + to.y + '"]');
-							var tX = toTileElm.position().left;
-							var tY = toTileElm.position().top;
-							var fX = this.$el.position().left;
-							var fY = this.$el.position().top;
-
-							var ninjaTile = $('<div>').addClass('tile ninja');
-							ninjaTile.css({
-								top : fY,
-								left : fX
+							this.$el.attr({
+								'data-xy' : this.model.get('x') + '-' + this.model.get('y')
 							});
-							$('.game').append(ninjaTile);
-							ninjaTile.animate({
-								top : tY,
-								left : tX
-							}, 1000);
-
 						}
 					});
 

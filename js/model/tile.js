@@ -18,38 +18,50 @@ define([ 'backbone', 'model/symbols', 'model/symbol' ], function(Backbone,
 					this.set('edges', [], {
 						silent : true
 					});
-					this.set('value', this.get('symbols').sum());
+					this.set('value', this.get('symbols').sum(), {silent:true});
 				},
 
 				merge : function(oTile) {
 					var origVal = this.get('value');
 					var oSymbols = oTile.get('symbols'), symbols = this
 							.get('symbols'), matchedSymbol;
-					for (var i = 0; i < oSymbols.length; i++) {
-						var oSymbol = oSymbols.at(i);
-						matchedSymbol = symbols.findWhere({
-							'name' : oSymbol.get('name')
+					for (var i = 0; i < symbols.length; i++) {
+						var symbol = symbols.at(i);
+						matchedSymbol = oSymbols.findWhere({
+							'name' : symbol.get('name')
 						});
 						if (matchedSymbol) {
 							matchedSymbol.set('value', matchedSymbol
 									.get('value')
-									+ oSymbol.get('value'));
+									+ symbol.get('value'));
 						} else {
 							matchedSymbol = new Symbol({
-								name : oSymbol.get('name'),
-								value : oSymbol.get('value')
+								name : symbol.get('name'),
+								value : symbol.get('value')
 							});
-							symbols.add(matchedSymbol);
+							oSymbols.add(matchedSymbol);
 						}
 					}
-					this.set('value', this.get('symbols').sum());
-					if (origVal != 0) {
-						this.trigger('merge');
-					}
-					oTile.trigger('translate', {
+					var oX = oTile.get('x');
+					var oY = oTile.get('y');
+					oTile.set('value', oTile.get('symbols').sum(), {silent:true});
+					oTile.set({
 						x : this.get('x'),
-						y : this.get('y')
-					});
+						y : this.get('y'),
+					}, {silent:true});
+					oTile.trigger('translate');
+					this.set({
+						x : oX,
+						y : oY
+					}, {silent:true});
+					this.empty();
+					var _this = this;
+					setTimeout(function(){
+						if (origVal != 0) {
+							_this.trigger('merge');
+						}
+						_this.trigger('change');
+					}, 1000);
 				},
 
 				canMerge : function(oTile) {

@@ -63,17 +63,15 @@ define([ 'jquery', 'underscore', 'backbone', 'model/tiles', 'model/tile',
 			this.$el.empty();
 			var i, j, tile;
 			for (i = 0; i < 4; i++) {
-				var rowElm = $('<div>').addClass('row');
 				for (j = 0; j < 4; j++) {
 					tile = this.collection.findWhere({
 						x : i,
 						y : j
 					});
-					rowElm.append(new TileView({
+					this.$el.append(new TileView({
 						model : tile
 					}).render().$el);
 				}
-				this.$el.append(rowElm);
 			}
 			return this;
 		},
@@ -92,8 +90,11 @@ define([ 'jquery', 'underscore', 'backbone', 'model/tiles', 'model/tile',
 				'd' : this.moveDown
 			};
 			if (moves[dir]()) {
-				this.randomTile();
-				this.highlightEdges();
+				var _this = this;
+				setTimeout(function(){
+					_this.randomTile();
+					_this.highlightEdges();
+				}, 1200);
 			}
 		},
 
