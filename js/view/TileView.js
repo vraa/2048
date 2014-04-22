@@ -72,7 +72,6 @@ define(
 						},
 
 						merge : function() {
-							console.log('merged');
 							this.$el.find('.wrap').addClass('animated pulse');
 						},
 
@@ -80,6 +79,7 @@ define(
 							this.$el.attr({
 								'data-xy' : this.model.get('x') + '-' + this.model.get('y')
 							});
+							this.render();
 						}
 					});
 

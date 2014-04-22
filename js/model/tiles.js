@@ -214,6 +214,12 @@ define([ 'backbone', 'model/tile' ], function(Backbone, Tile) {
 			return null;
 		},
 
+		emptyTiles : function() {
+			return this.where({
+				value : 0
+			});
+		},
+
 		nonEmptyTiles : function() {
 			return this.filter(function(tile) {
 				return tile.get('value') != 0;
