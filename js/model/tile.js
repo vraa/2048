@@ -61,7 +61,7 @@ define([ 'backbone', 'model/symbols', 'model/symbol' ], function(Backbone,
 							_this.trigger('merge');
 						}
 						_this.trigger('change');
-					}, 1000);
+					}, 300);
 				},
 
 				canMerge : function(oTile) {

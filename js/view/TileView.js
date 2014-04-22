@@ -19,7 +19,10 @@ define(
 						},
 
 						render : function() {
-							
+							if(this.model.get('value') == 0){
+								this.$el.empty().addClass('empty');
+								return this;
+							}
 							this.$el.html(this.template(this.model.toJSON()));
 							if (this.model.get('value') != 0) {
 								this.$el.find('.wrap').append(new SymbolView({

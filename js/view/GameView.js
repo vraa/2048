@@ -91,25 +91,20 @@ define([ 'jquery', 'underscore', 'backbone', 'model/tiles', 'model/tile',
 			};
 			if (moves[dir]()) {
 				var _this = this;
-				setTimeout(function(){
+				setTimeout(function() {
 					_this.randomTile();
 					_this.highlightEdges();
-				}, 1200);
+				}, 400);
 			}
 		},
 
 		moveRight : function() {
-			var j, isMoved = false;
-			for (j = 2; j >= 0; j--) {
-				var tiles = this.collection.where({
-					y : j
-				});
-				for (var i = 0; i < tiles.length; i++) {
-					var tile = tiles[i];
-					if (tile.get('value') != 0) {
-						if (this.collection.moveToFarRight(tile)) {
-							isMoved = true;
-						}
+			var col, isMoved = false;
+			for (col = 2; col >= 0; col--) {
+				var tiles = this.collection.nonEmptyTilesAtColumn(col);
+				for (var row = 0, height = tiles.length; row < height; row++) {
+					if (this.collection.moveToFarRight(tiles[row])) {
+						isMoved = true;
 					}
 				}
 			}
@@ -117,17 +112,12 @@ define([ 'jquery', 'underscore', 'backbone', 'model/tiles', 'model/tile',
 		},
 
 		moveLeft : function() {
-			var j, isMoved = false;
-			for (j = 1; j < 4; j++) {
-				var tiles = this.collection.where({
-					y : j
-				});
-				for (var i = 0; i < tiles.length; i++) {
-					var tile = tiles[i];
-					if (tile.get('value') != 0) {
-						if (this.collection.moveToFarLeft(tile)) {
-							isMoved = true;
-						}
+			var col, isMoved = false;
+			for (col = 1; col < 4; col++) {
+				var tiles = this.collection.nonEmptyTilesAtColumn(col);
+				for (var row = 0, height = tiles.length; row < height; row++) {
+					if (this.collection.moveToFarLeft(tiles[row])) {
+						isMoved = true;
 					}
 				}
 			}
@@ -135,17 +125,12 @@ define([ 'jquery', 'underscore', 'backbone', 'model/tiles', 'model/tile',
 		},
 
 		moveUp : function() {
-			var i, isMoved = false;
-			for (i = 1; i < 4; i++) {
-				var tiles = this.collection.where({
-					x : i
-				});
-				for (var j = 0; j < tiles.length; j++) {
-					var tile = tiles[j];
-					if (tile.get('value') != 0) {
-						if (this.collection.moveToFarUp(tile)) {
-							isMoved = true;
-						}
+			var row, isMoved = false;
+			for (row = 1; row < 4; row++) {
+				var tiles = this.collection.nonEmptyTilesAtRow(row);
+				for (var col = 0, width = tiles.length; col < width; col++) {
+					if (this.collection.moveToFarUp(tiles[col])) {
+						isMoved = true;
 					}
 				}
 			}
@@ -153,17 +138,12 @@ define([ 'jquery', 'underscore', 'backbone', 'model/tiles', 'model/tile',
 		},
 
 		moveDown : function() {
-			var i, isMoved = false;
-			for (i = 3; i >= 0; i--) {
-				var tiles = this.collection.where({
-					x : i
-				});
-				for (var j = 0; j < tiles.length; j++) {
-					var tile = tiles[j];
-					if (tile.get('value') != 0) {
-						if (this.collection.moveToFarDown(tile)) {
-							isMoved = true;
-						}
+			var row, isMoved = false;
+			for (row = 3; row >= 0; row--) {
+				var tiles = this.collection.nonEmptyTilesAtRow(row);
+				for (var col = 0, width = tiles.length; col < width; col++) {
+					if (this.collection.moveToFarDown(tiles[col])) {
+						isMoved = true;
 					}
 				}
 			}
@@ -171,9 +151,7 @@ define([ 'jquery', 'underscore', 'backbone', 'model/tiles', 'model/tile',
 		},
 
 		highlightEdges : function() {
-			var nonEmptyTiles = this.collection.filter(function(tile) {
-				return tile.get('value') != 0;
-			});
+			var nonEmptyTiles = this.collection.nonEmptyTiles();
 			for (var i = 0; i < nonEmptyTiles.length; i++) {
 				this.collection.detectEdges(nonEmptyTiles[i]);
 			}

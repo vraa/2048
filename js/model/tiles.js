@@ -212,6 +212,24 @@ define([ 'backbone', 'model/tile' ], function(Backbone, Tile) {
 				}
 			}
 			return null;
+		},
+
+		nonEmptyTiles : function() {
+			return this.filter(function(tile) {
+				return tile.get('value') != 0;
+			});
+		},
+
+		nonEmptyTilesAtColumn : function(col) {
+			return this.filter(function(tile) {
+				return tile.get('y') == col && tile.get('value') != 0;
+			});
+		},
+
+		nonEmptyTilesAtRow : function(row) {
+			return this.filter(function(tile) {
+				return tile.get('x') == row && tile.get('value') != 0;
+			});
 		}
 	});
 
