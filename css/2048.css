@@ -75,7 +75,7 @@ a, a:hover, a:active, a:link, a:visited{
 		display:none;
 	}
 		.tile.non-empty{
-			transition:transform 200ms ease-in-out 0s;
+			transition:transform 1000ms ease-in-out 0s;
 			z-index:20;
 		}
 		.tile[data-xy="0-0"]{
@@ -146,15 +146,32 @@ a, a:hover, a:active, a:link, a:visited{
 	.tile.can-merge{
 		box-shadow:0 0 10px #aaa;
 		background: rgb(255,255,255); /* Old browsers */
-background: -moz-radial-gradient(center, ellipse cover,  rgba(255,255,255,1) 0%, rgba(238,228,218,1) 100%); /* FF3.6+ */
-background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(255,255,255,1)), color-stop(100%,rgba(238,228,218,1))); /* Chrome,Safari4+ */
-background: -webkit-radial-gradient(center, ellipse cover,  rgba(255,255,255,1) 0%,rgba(238,228,218,1) 100%); /* Chrome10+,Safari5.1+ */
-background: -o-radial-gradient(center, ellipse cover,  rgba(255,255,255,1) 0%,rgba(238,228,218,1) 100%); /* Opera 12+ */
-background: -ms-radial-gradient(center, ellipse cover,  rgba(255,255,255,1) 0%,rgba(238,228,218,1) 100%); /* IE10+ */
-background: radial-gradient(ellipse at center,  rgba(255,255,255,1) 0%,rgba(238,228,218,1) 100%); /* W3C */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#eee4da',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+		background: -moz-radial-gradient(center, ellipse cover,  rgba(255,255,255,1) 0%, rgba(238,228,218,1) 100%); /* FF3.6+ */
+		background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(255,255,255,1)), color-stop(100%,rgba(238,228,218,1))); /* Chrome,Safari4+ */
+		background: -webkit-radial-gradient(center, ellipse cover,  rgba(255,255,255,1) 0%,rgba(238,228,218,1) 100%); /* Chrome10+,Safari5.1+ */
+		background: -o-radial-gradient(center, ellipse cover,  rgba(255,255,255,1) 0%,rgba(238,228,218,1) 100%); /* Opera 12+ */
+		background: -ms-radial-gradient(center, ellipse cover,  rgba(255,255,255,1) 0%,rgba(238,228,218,1) 100%); /* IE10+ */
+		background: radial-gradient(ellipse at center,  rgba(255,255,255,1) 0%,rgba(238,228,218,1) 100%); /* W3C */
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#eee4da',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 		
 	}
+	.tile.moving{
+		border-color:#EEE4DA!important;
+	}
+	.tile[data-edge-t="1"]{
+		border-top-color:#1DD2AF;
+	}
+	.tile[data-edge-b="1"]{
+		border-bottom-color:#1DD2AF;
+	}
+	.tile[data-edge-l="1"]{
+		border-left-color:#1DD2AF;
+	}
+	.tile[data-edge-r="1"]{
+		border-right-color:#1DD2AF;
+	}
+	
+	/*
 	.tile[data-value="2"][data-edge-t="1"]{
 		border-top-color:#1DD2AF;
 	}
@@ -297,6 +314,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 	.tile[data-value="2048"][data-edge-r="1"]{
 		border-right-color:#E74C3C;
 	}
+	*/
 
 .tile.empty{
 	background-color:#CDC0B4;
@@ -403,8 +421,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
   }
   
   50% {
-  	-webkit-transform: scale(1.2);
-    transform: scale(1.2);
+  	-webkit-transform: scale(2);
+    transform: scale(2);
   }
 
   100% {
@@ -421,9 +439,9 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
   }
   
    50% {
-    -webkit-transform: scale(1.2);
-    -ms-transform: scale(1.2);
-    transform: scale(1.2);
+    -webkit-transform: scale(2);
+    -ms-transform: scale(2);
+    transform: scale(2);
   }
 
   100% {

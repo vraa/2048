@@ -72,13 +72,16 @@ define(
 						},
 
 						merge : function() {
+							this.render();
 							this.$el.find('.wrap').addClass('animated pulse');
 						},
 
 						translate : function(to) {
+							this.$el.addClass('moving');
 							this.$el.attr({
 								'data-xy' : this.model.get('x') + '-' + this.model.get('y')
 							});
+							this.$el.removeClass('moving');
 							this.render();
 						}
 					});

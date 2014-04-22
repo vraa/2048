@@ -4,9 +4,15 @@ define([ 'backbone', 'model/symbol' ], function(Backbone, Symbol) {
 		model : Symbol,
 
 		sum : function() {
-			return this.reduce(function(memo, symbol){
+			return this.reduce(function(memo, symbol) {
 				return memo + symbol.get('value');
-			},0);
+			}, 0);
+		},
+
+		byName : function(name) {
+			return this.findWhere({
+				'name' : name
+			});
 		}
 	});
 

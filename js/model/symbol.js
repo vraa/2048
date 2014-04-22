@@ -6,6 +6,10 @@ define([ 'backbone' ], function(Backbone) {
 			'value' : 0
 		},
 
+		addValue : function(value) {
+			this.set('value', this.get('value') + value);
+		},
+
 		toString : function() {
 			return this.get('name') + ' ' + this.get('value');
 		}

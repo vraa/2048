@@ -78,7 +78,7 @@ define(
 								setTimeout(function() {
 									_this.randomTile();
 									_this.highlightEdges();
-								}, 400);
+								}, 1500);
 							}
 						},
 

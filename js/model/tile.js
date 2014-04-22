@@ -12,6 +12,12 @@ define(
 							edges : []
 						},
 
+						updateValue : function(isSilent) {
+							this.set('value', this.get('symbols').sum(), {
+								silent : isSilent
+							});
+						},
+
 						empty : function() {
 							this.set({
 								'symbols' : new Symbols(),
@@ -24,56 +30,66 @@ define(
 
 						merge : function(oTile) {
 							var origVal = this.get('value');
-							var oSymbols = oTile.get('symbols'), symbols = this
-									.get('symbols'), matchedSymbol;
-							for (var i = 0; i < symbols.length; i++) {
-								var symbol = symbols.at(i);
-								matchedSymbol = oSymbols.findWhere({
-									'name' : symbol.get('name')
-								});
-								if (matchedSymbol) {
-									matchedSymbol.set('value', matchedSymbol
-											.get('value')
-											+ symbol.get('value'));
-								} else {
-									matchedSymbol = new Symbol({
-										name : symbol.get('name'),
-										value : symbol.get('value')
-									});
-									oSymbols.add(matchedSymbol);
-								}
-							}
-							if (symbols.length > 0) {
-								oTile.set('value', oTile.get('symbols').sum(),
-										{
-											silent : true
-										});
-							}
-							var oX = oTile.get('x');
-							var oY = oTile.get('y');
-							oTile.set({
-								x : this.get('x'),
-								y : this.get('y'),
-							}, {
-								silent : true
-							});
-							oTile.trigger('translate');
-							this.set({
-								x : oX,
-								y : oY
-							}, {
-								silent : true
-							});
 							if (origVal != 0) {
-								this.empty();
+								var oSymbols = oTile.get('symbols'), symbols = this
+										.get('symbols'), matchedSymbol;
+
+								for (var index = 0, numOfSymbols = oSymbols.length; index < numOfSymbols; index += 1) {
+									var oSymbol = oSymbols.at(index);
+									matchedSymbol = symbols.byName(oSymbol
+											.get('name'));
+									if (matchedSymbol) {
+										matchedSymbol.addValue(oSymbol
+												.get('value'));
+									} else {
+										var newSymbol = new Symbol({
+											name : oSymbol.get('name'),
+											value : oSymbol.get('value')
+										});
+										symbols.add(newSymbol);
+									}
+								}
+
+								var oX = oTile.get('x');
+								var oY = oTile.get('y');
+								oTile.set({
+									x : this.get('x'),
+									y : this.get('y'),
+								}, {
+									silent : true
+								});
+								oTile.trigger('translate');
+								oTile.set({
+									x : oX,
+									y : oY
+								}, {
+									silent : true
+								});
+							} else {
+								var oX = oTile.get('x');
+								var oY = oTile.get('y');
+								oTile.set({
+									x : this.get('x'),
+									y : this.get('y'),
+								}, {
+									silent : true
+								});
+								oTile.trigger('translate');
+								this.set({
+									x : oX,
+									y : oY
+								});
 							}
+
 							var _this = this;
 							setTimeout(function() {
 								if (origVal != 0) {
+									_this.updateValue(true);
+									oTile.empty();
 									_this.trigger('merge');
 								}
-								_this.trigger('change');
-							}, 300);
+								oTile.trigger('change');
+							}, 1200);
 						},
 
 						canMerge : function(oTile) {
