@@ -78,7 +78,7 @@ define(
 								setTimeout(function() {
 									_this.randomTile();
 									_this.highlightEdges();
-								}, 1500);
+								}, 250);
 							}
 						},
 
@@ -151,6 +151,23 @@ define(
 						randomTile : function(num) {
 							num = num ? num : 1;
 							var emptyTiles = this.collection.emptyTiles();
+							/*
+							for(i=0; i<4; i++){
+								if(i == 1 || i == 2) continue;
+								var symbols = new Symbols();
+								symbols.add(new Symbol({
+									'value' : 2,
+									'name' : 'star'
+								}));
+								emptyTiles[i].set({
+									value : symbols.sum(),
+									symbols : symbols
+								});
+								emptyTiles[i].trigger('appear');
+							}
+							return;
+							*/
+
 							for (var count = 1; count <= num; count++) {
 								var chosenTile = emptyTiles[this.randomNumber(
 										0, emptyTiles.length - 1)];
@@ -168,7 +185,7 @@ define(
 								chosenTile.set({
 									value : symbols.sum(),
 									symbols : symbols
-								});
+								}, {silent:true});
 								chosenTile.trigger('appear');
 							}
 						},

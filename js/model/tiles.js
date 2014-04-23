@@ -174,7 +174,7 @@ define([ 'backbone', 'model/tile' ], function(Backbone, Tile) {
 
 		nonEmptyTileTowardsLeft : function(tile) {
 			var row = tile.get('x'), col;
-			for (col = tile.get('y') - 1; col > 0; col--) {
+			for (col = tile.get('y') - 1; col >= 0; col--) {
 				var nxtTile = this.findWhere({
 					x : row,
 					y : col
@@ -188,7 +188,7 @@ define([ 'backbone', 'model/tile' ], function(Backbone, Tile) {
 
 		nonEmptyTileTowardsTop : function(tile) {
 			var col = tile.get('y'), row;
-			for (row = tile.get('x') - 1; row > 0; row--) {
+			for (row = tile.get('x') - 1; row >= 0; row--) {
 				var nxtTile = this.findWhere({
 					x : row,
 					y : col

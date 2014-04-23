@@ -49,21 +49,9 @@ define(
 										symbols.add(newSymbol);
 									}
 								}
-
-								var oX = oTile.get('x');
-								var oY = oTile.get('y');
-								oTile.set({
+								oTile.trigger('translate', {
 									x : this.get('x'),
-									y : this.get('y'),
-								}, {
-									silent : true
-								});
-								oTile.trigger('translate');
-								oTile.set({
-									x : oX,
-									y : oY
-								}, {
-									silent : true
+									y : this.get('y')
 								});
 							} else {
 								var oX = oTile.get('x');
@@ -74,22 +62,25 @@ define(
 								}, {
 									silent : true
 								});
-								oTile.trigger('translate');
+								oTile.trigger('translate', {x : this.get('x'), y: this.get('y')});
 								this.set({
 									x : oX,
 									y : oY
 								});
 							}
 
+							if (origVal != 0) {
+								this.updateValue(true);
+								this.set('state', 'merged', {silent:true});
+								oTile.empty();
+							}else{
+								this.trigger('change');
+							}
 							var _this = this;
-							setTimeout(function() {
-								if (origVal != 0) {
-									_this.updateValue(true);
-									oTile.empty();
-									_this.trigger('merge');
-								}
+							setTimeout(function(){
 								oTile.trigger('change');
-							}, 1200);
+								_this.trigger('merge');
+							},210);
 						},
 
 						canMerge : function(oTile) {
