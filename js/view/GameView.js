@@ -9,24 +9,9 @@ define(
 						className : 'game',
 						collection : Tiles,
 						seedSymbols : [ [ {
-							name : 'circle',
-							value : 2
-						} ], [ {
 							name : 'star',
 							value : 2
 						} ], [ {
-							name : 'heart',
-							value : 2
-						} ], [ {
-							name : 'circle',
-							value : 2
-						}, {
-							name : 'star',
-							value : 2
-						} ], [ {
-							name : 'circle',
-							value : 2
-						}, {
 							name : 'heart',
 							value : 2
 						} ], [ {
