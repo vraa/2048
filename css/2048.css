@@ -240,16 +240,16 @@ a, a:hover, a:active, a:link, a:visited{
     border-color:#EEE4DA!important;
 }
 .tile[data-edge-t="1"]{
-    border-top-color:#1DD2AF;
+    border-top-color:#f00;
 }
 .tile[data-edge-b="1"]{
-    border-bottom-color:#1DD2AF;
+    border-bottom-color:#f00;
 }
 .tile[data-edge-l="1"]{
-    border-left-color:#1DD2AF;
+    border-left-color:#f00;
 }
 .tile[data-edge-r="1"]{
-    border-right-color:#1DD2AF;
+    border-right-color:#f00;
 }
 .tile.empty{
     background-color:#CDC0B4;
