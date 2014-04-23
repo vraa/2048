@@ -79,9 +79,9 @@ a, a:hover, a:active, a:link, a:visited{
 }
 .tile.non-empty{
     /*transition*/
-    -webkit-transition:transform 200ms ease-in-out 0s;
-    -moz-transition:transform 200ms ease-in-out 0s;
-    -o-transition:transform 200ms ease-in-out 0s;
+    -webkit-transition:-webkit-transform 200ms ease-in-out 0s;
+    -moz-transition:-moz-transform 200ms ease-in-out 0s;
+    -o-transition:-o-transform 200ms ease-in-out 0s;
     transition:transform 200ms ease-in-out 0s;
     z-index:20;
 }
