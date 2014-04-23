@@ -8,14 +8,15 @@ body{
 a, a:hover, a:active, a:link, a:visited{
     color:#776E65;
 }
+.container{
+	width:524px;
+	margin:0 auto;
+}
 .app{
-    width:524px;
-    margin:0 auto;
     position:relative;
 }
 .game{
     margin:0 auto;
-    width:524px;
 }
 .game .row{
     overflow:hidden;
@@ -402,9 +403,44 @@ a, a:hover, a:active, a:link, a:visited{
     -o-animation-name:pulse;
     animation-name:pulse;
 }
+
+@-webkit-keyframes fadeOutDownBig {
+  0% {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+
+  100% {
+    opacity: 0;
+    -webkit-transform: translateY(2000px);
+    transform: translateY(2000px);
+  }
+}
+
+@keyframes fadeOutDownBig {
+  0% {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+    -ms-transform: translateY(0);
+    transform: translateY(0);
+  }
+
+  100% {
+    opacity: 0;
+    -webkit-transform: translateY(2000px);
+    -ms-transform: translateY(2000px);
+    transform: translateY(2000px);
+  }
+}
+
+.fadeOutDownBig {
+  -webkit-animation-name: fadeOutDownBig;
+  animation-name: fadeOutDownBig;
+}
+
 header{
     margin:0 auto;
-    width:524px;
     overflow:hidden;
     margin-top:50px;
 }
@@ -413,7 +449,7 @@ header .site-info, header .control-panel{
 }
 header .site-info{
     text-align:left;
-    width:70%;
+    width:50%;
 }
 .site-info h1{
     font-size:3rem;
@@ -426,10 +462,12 @@ header .site-info{
     padding:0;
 }
 header .control-panel{
-    width:30%;
+    width:50%;
+}
+p.sub{
+	text-align:left;
 }
 .content{
-    width:524px;
     margin:30px auto 0 auto;
     text-align:left;
 }
@@ -440,4 +478,22 @@ header .control-panel{
 }
 .content .how-to{
     border-bottom:1px solid #D8D4D0;
+}
+
+.score{
+	float:right;
+	background-color:#BBADA0;
+	color:#fff;
+	padding:5px 10px;
+	border-radius:10px;
+	text-transform: uppercase;
+	font-weight:bold;
+}
+.score label{
+	font-size:.71rem;
+	color:#EEE4DA;
+}
+.score strong{
+	display:block;
+	font-size:1.5rem;
 }

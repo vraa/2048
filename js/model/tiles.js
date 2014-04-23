@@ -8,6 +8,7 @@ define([ 'backbone', 'model/tile' ], function(Backbone, Tile) {
 			if (nonEmptyTile != null && nonEmptyTile.canMerge(tile)) {
 				nonEmptyTile.merge(tile);
 				isMerged = true;
+				this.trigger('tile-merge', nonEmptyTile.get('value'));
 			} else if (emptyTile != null) {
 				emptyTile.merge(tile);
 				isMerged = true;

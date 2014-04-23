@@ -1,12 +1,13 @@
 define(
 		[ 'jquery', 'underscore', 'backbone', 'model/tiles', 'model/tile',
-				'model/symbols', 'model/symbol', 'view/TileView' ],
-		function($, _, Backbone, Tiles, Tile, Symbols, Symbol, TileView) {
+				'model/symbols', 'model/symbol', 'view/TileView', 'model/game' ],
+		function($, _, Backbone, Tiles, Tile, Symbols, Symbol, TileView, Game) {
 
 			var GameView = Backbone.View
 					.extend({
 
 						className : 'game',
+						model : Game,
 						collection : Tiles,
 						seedSymbols : [ [ {
 							name : 'star',
@@ -26,6 +27,8 @@ define(
 									'randomNumber', 'move', 'moveRight',
 									'moveLeft', 'moveUp', 'moveDown',
 									'highlightEdges');
+							this.listenTo(this.collection, 'tile-merge',
+									this.updateScore);
 							Backbone.on('game:start', this.start);
 						},
 
@@ -49,6 +52,12 @@ define(
 						start : function() {
 							this.randomTile(2);
 							this.highlightEdges();
+						},
+
+						updateScore : function(score) {
+							this.model.set({
+								'score' : this.model.get('score') + score
+							});
 						},
 
 						move : function(dir) {
@@ -136,22 +145,6 @@ define(
 						randomTile : function(num) {
 							num = num ? num : 1;
 							var emptyTiles = this.collection.emptyTiles();
-							/*
-							for(i=0; i<4; i++){
-								if(i == 1 || i == 2) continue;
-								var symbols = new Symbols();
-								symbols.add(new Symbol({
-									'value' : 2,
-									'name' : 'star'
-								}));
-								emptyTiles[i].set({
-									value : symbols.sum(),
-									symbols : symbols
-								});
-								emptyTiles[i].trigger('appear');
-							}
-							return;
-							*/
 
 							for (var count = 1; count <= num; count++) {
 								var chosenTile = emptyTiles[this.randomNumber(
@@ -170,7 +163,9 @@ define(
 								chosenTile.set({
 									value : symbols.sum(),
 									symbols : symbols
-								}, {silent:true});
+								}, {
+									silent : true
+								});
 								chosenTile.trigger('appear');
 							}
 						},
