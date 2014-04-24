@@ -1,6 +1,6 @@
 define([ 'jquery', 'underscore', 'backbone', 'view/GameView', 'model/tiles',
 		'model/tile', 'model/symbols', 'model/game', 'view/scoreView',
-		'text!templates/over.html' ], function($, _, Backbone, GameView, Tiles,
+		'text!templates/over.html', 'swipe' ], function($, _, Backbone, GameView, Tiles,
 		Tile, Symbols, Game, ScoreView, OverTemplate) {
 
 	var ApplicationView = Backbone.View
@@ -14,7 +14,11 @@ define([ 'jquery', 'underscore', 'backbone', 'view/GameView', 'model/tiles',
 					'38' : 'u',
 					'40' : 'd',
 					'37' : 'l',
-					'39' : 'r'
+					'39' : 'r',
+					'swipeleft' : 'l',
+					'swiperight' : 'r',
+					'swipedown' : 'd',
+					'swipeup' : 'u'
 				},
 
 				events : {
@@ -33,6 +37,19 @@ define([ 'jquery', 'underscore', 'backbone', 'view/GameView', 'model/tiles',
 					});
 					this.listenTo(this.game, 'over', this.gameOver);
 					this.render();
+					this.bindSwipe();
+				},
+				
+				bindSwipe : function(){
+					var _this = this;
+					this.$el.swipe({
+						swipe : function(event, direction){
+							var mapped = _this.keyMaps['swipe'+direction];
+							if(mapped){
+								_this.gameView.move(mapped);
+							}
+						}
+					});
 				},
 
 				render : function() {

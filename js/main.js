@@ -3,7 +3,8 @@ require.config({
 	paths : {
 		'jquery' : 'lib/jquery-1.11.0.min',
 		'backbone' : 'lib/backbone-min',
-		'underscore' : 'lib/underscore-min'
+		'underscore' : 'lib/underscore-min',
+		'swipe' : 'lib/jquery.touchSwipe.min'
 	},
 
 	shim : {
