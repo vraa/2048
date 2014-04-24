@@ -157,6 +157,7 @@ define([ 'backbone', 'model/tile' ], function(Backbone, Tile) {
 			}
 
 			tile.set('edges', edges);
+			return edges.length > 0 ? true : false;
 		},
 
 		nonEmptyTileTowardsRight : function(tile) {
@@ -236,6 +237,12 @@ define([ 'backbone', 'model/tile' ], function(Backbone, Tile) {
 		nonEmptyTilesAtRow : function(row) {
 			return this.filter(function(tile) {
 				return tile.get('x') == row && tile.get('value') != 0;
+			});
+		},
+		
+		tile2048 : function(){
+			return this.findWhere({
+				value : 2048
 			});
 		}
 	});

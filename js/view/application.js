@@ -1,11 +1,14 @@
 define([ 'jquery', 'underscore', 'backbone', 'view/GameView', 'model/tiles',
-		'model/tile', 'model/symbols', 'model/game', 'view/scoreView' ],
-		function($, _, Backbone, GameView, Tiles, Tile, Symbols, Game,
-				ScoreView) {
+		'model/tile', 'model/symbols', 'model/game', 'view/scoreView',
+		'text!templates/over.html' ], function($, _, Backbone, GameView, Tiles,
+		Tile, Symbols, Game, ScoreView, OverTemplate) {
 
-			var ApplicationView = Backbone.View.extend({
+	var ApplicationView = Backbone.View
+			.extend({
 
 				el : 'body',
+
+				overTemplate : _.template(OverTemplate),
 
 				keyMaps : {
 					'38' : 'u',
@@ -15,15 +18,12 @@ define([ 'jquery', 'underscore', 'backbone', 'view/GameView', 'model/tiles',
 				},
 
 				events : {
-					'keydown' : 'handleKey'
+					'keydown' : 'handleKey',
+					'click #tryAgain' : 'restart'
 				},
 
 				initialize : function() {
 					this.game = new Game();
-					this.render();
-				},
-
-				render : function() {
 					this.gameView = new GameView({
 						model : this.game,
 						collection : this.seedData()
@@ -31,9 +31,24 @@ define([ 'jquery', 'underscore', 'backbone', 'view/GameView', 'model/tiles',
 					this.scoreView = new ScoreView({
 						model : this.game
 					});
+					this.listenTo(this.game, 'over', this.gameOver);
+					this.render();
+				},
+
+				render : function() {
 					this.$el.find('.pad').empty().append(
 							this.gameView.render().$el);
 					this.gameView.start();
+				},
+
+				restart : function() {
+					this.$el.find('.over').remove();
+					this.initialize();
+				},
+
+				gameOver : function() {
+					this.$el.find('.app').append(
+							this.overTemplate(this.game.toJSON()));
 				},
 
 				seedData : function() {
@@ -63,6 +78,6 @@ define([ 'jquery', 'underscore', 'backbone', 'view/GameView', 'model/tiles',
 
 			});
 
-			return ApplicationView;
+	return ApplicationView;
 
-		});
+});

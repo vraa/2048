@@ -5,7 +5,6 @@ define(
 
 			var GameView = Backbone.View
 					.extend({
-
 						className : 'game',
 						model : Game,
 						collection : Tiles,
@@ -61,6 +60,7 @@ define(
 						},
 
 						move : function(dir) {
+							var edgesDetected = false;
 							var moves = {
 								'r' : this.moveRight,
 								'l' : this.moveLeft,
@@ -70,9 +70,21 @@ define(
 							if (moves[dir]()) {
 								var _this = this;
 								setTimeout(function() {
+									edgesDetected = _this.highlightEdges();
+									_this.isGameOver(edgesDetected);
 									_this.randomTile();
-									_this.highlightEdges();
 								}, 250);
+							}
+						},
+
+						isGameOver : function(detectedEdges) {
+							if (!detectedEdges
+									&& this.collection.nonEmptyTiles().length == 16) {
+								this.model.set('won', false);
+								this.model.trigger('over');
+							} else if (this.collection.tile2048() != null) {
+								this.model.set('won', true);
+								this.model.trigger('over');
 							}
 						},
 
@@ -136,10 +148,15 @@ define(
 						},
 
 						highlightEdges : function() {
+							var edgesDetected = false;
 							var nonEmptyTiles = this.collection.nonEmptyTiles();
 							for (var i = 0; i < nonEmptyTiles.length; i++) {
-								this.collection.detectEdges(nonEmptyTiles[i]);
+								if (this.collection
+										.detectEdges(nonEmptyTiles[i])) {
+									edgesDetected = true;
+								}
 							}
+							return edgesDetected;
 						},
 
 						randomTile : function(num) {
