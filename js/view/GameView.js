@@ -70,9 +70,9 @@ define(
 							if (moves[dir]()) {
 								var _this = this;
 								setTimeout(function() {
+									_this.randomTile();
 									edgesDetected = _this.highlightEdges();
 									_this.isGameOver(edgesDetected);
-									_this.randomTile();
 								}, 250);
 							}
 						},
@@ -82,9 +82,15 @@ define(
 									&& this.collection.nonEmptyTiles().length == 16) {
 								this.model.set('won', false);
 								this.model.trigger('over');
+								if(ga){
+									ga('send', 'event', 'game', 'lost', 'score', this.model.get('score'));
+								}
 							} else if (this.collection.tile2048() != null) {
 								this.model.set('won', true);
 								this.model.trigger('over');
+								if(ga){
+									ga('send', 'event', 'game', 'won', 'score', this.model.get('score'));
+								}
 							}
 						},
 

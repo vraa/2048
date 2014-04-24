@@ -61,6 +61,9 @@ define([ 'jquery', 'underscore', 'backbone', 'view/GameView', 'model/tiles',
 				restart : function() {
 					this.$el.find('.over').remove();
 					this.initialize();
+					if(ga){
+						ga('send', 'event', 'game', 'retry');
+					}
 				},
 
 				gameOver : function() {
