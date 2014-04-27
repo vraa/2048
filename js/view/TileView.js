@@ -35,6 +35,16 @@ define(
 							} else {
 								this.$el.removeClass('empty').addClass('non-empty');
 							}
+
+							this.renderEdges();
+
+							this.$el
+									.attr('data-value', this.model.get('value'));
+
+							return this;
+						},
+
+						renderEdges : function(){
 							var edges = this.model.get('edges');
 							this.$el.attr({
 								'data-xy' : this.model.get('x') + '-' + this.model.get('y')
@@ -60,22 +70,11 @@ define(
 							}else{
 								this.$el.removeClass('can-merge');
 							}
-							this.$el
-									.attr('data-value', this.model.get('value'));
-							this.$el.removeClass('animated grow pulse');
-
-							return this;
 						},
 
 						appear : function() {
 							this.render();
 							this.$el.find('.wrap').addClass('animated grow');
-						},
-
-						merge : function() {
-							this.render();
-							return;
-							this.$el.find('.wrap').addClass('animated pulse');
 						},
 
 						translate : function(to) {
@@ -84,7 +83,6 @@ define(
 								'data-xy' : to.x + '-' + to.y
 							});
 							this.$el.removeClass('moving');
-							//this.render();
 						}
 					});
 

@@ -53,6 +53,9 @@ define(
 									x : this.get('x'),
 									y : this.get('y')
 								});
+								this.updateValue(true);
+								this.set('state', 'merged', {silent:true});
+								oTile.empty();
 							} else {
 								var oX = oTile.get('x');
 								var oY = oTile.get('y');
@@ -67,19 +70,12 @@ define(
 									x : oX,
 									y : oY
 								});
-							}
-
-							if (origVal != 0) {
-								this.updateValue(true);
-								this.set('state', 'merged', {silent:true});
-								oTile.empty();
-							}else{
 								this.trigger('change');
 							}
 							var _this = this;
 							setTimeout(function(){
 								oTile.trigger('change');
-								_this.trigger('merge');
+								origVal != 0 ?_this.trigger('change') : null;
 							},210);
 						},
 
