@@ -481,13 +481,14 @@ p.sub{
 }
 
 .score{
-	float:right;
+	float:left;
 	background-color:#BBADA0;
 	color:#fff;
 	padding:5px 10px;
 	border-radius:10px;
 	text-transform: uppercase;
 	font-weight:bold;
+    margin-right: 10px;
 }
 .score label{
 	font-size:.71rem;
@@ -495,7 +496,7 @@ p.sub{
 }
 .score strong{
 	display:block;
-	font-size:1.5rem;
+	font-size:1.2rem;
 }
 
 .app .over{

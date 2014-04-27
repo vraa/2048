@@ -3,7 +3,7 @@ define([ 'jquery', 'underscore', 'backbone', 'model/game' ], function($, _,
 
 	var ScoreView = Backbone.View.extend({
 
-		el : '#score',
+		el : '.control-panel',
 
 		model : Game,
 
@@ -13,8 +13,17 @@ define([ 'jquery', 'underscore', 'backbone', 'model/game' ], function($, _,
 		},
 
 		render : function() {
-			this.$el.find('strong').html(this.model.get('score')).addClass(
-					'animated pulse').removeClass('animated pulse');
+			var _this = this;
+			this.$el.find('#game-score strong').html(this.model.get('score')).addClass(
+					'animated pulse');
+			this.$el.find('#best-score strong').html(this.model.get('best'));
+			if(this.model.get('score') >= this.model.get('best')){
+				this.$el.find('#best-score strong').addClass(
+					'animated pulse');
+			}
+			setTimeout(function(){
+				_this.$el.find('.animated').removeClass('animated pulse');
+			}, 500);
 		}
 
 	});

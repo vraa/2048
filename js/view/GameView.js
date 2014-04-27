@@ -56,7 +56,12 @@ define(
 						updateScore : function(score) {
 							this.model.set({
 								'score' : this.model.get('score') + score
-							});
+							}, {silent:true});
+							if(this.model.get('score') >= this.model.get('best')){
+								this.model.set('best', this.model.get('score'), {silent:true});
+								window.localStorage.setItem('bestScore', this.model.get('best'));
+							}
+							this.model.trigger('change');
 						},
 
 						move : function(dir) {

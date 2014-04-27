@@ -37,7 +37,13 @@ define([ 'jquery', 'underscore', 'backbone', 'view/GameView', 'model/tiles',
 					});
 					this.listenTo(this.game, 'over', this.gameOver);
 					this.render();
+					this.loadBestScore();
 					this.bindSwipe();
+				},
+
+				loadBestScore : function(){
+					var bestScore = window.localStorage.getItem('bestScore');
+					bestScore ? this.game.set('best', parseInt(bestScore, 10)) : null;
 				},
 				
 				bindSwipe : function(){
