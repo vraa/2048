@@ -41,6 +41,16 @@ define(
 							this.$el
 									.attr('data-value', this.model.get('value'));
 
+							if(this.model.get('state') === 'merged'){
+								this.model.set('state', '', {silent:true});
+								this.$el.find('.wrap').addClass('animated pulse');
+							}
+							var _this = this;
+							setTimeout(function(){
+								_this.$el.find('.wrap').removeClass('animated grow pulse');
+							},220);
+							
+
 							return this;
 						},
 
