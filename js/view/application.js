@@ -67,8 +67,11 @@ define([ 'jquery', 'underscore', 'backbone', 'view/GameView', 'model/tiles',
 				},
 
 				gameOver : function() {
-					this.$el.find('.app').append(
-							this.overTemplate(this.game.toJSON()));
+					var _this = this;
+					setTimeout(function(){
+						_this.$el.find('.app').append(
+							_this.overTemplate(_this.game.toJSON()));
+					}, 1000);
 				},
 
 				seedData : function() {
