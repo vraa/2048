@@ -42,7 +42,7 @@ define([ 'jquery', 'underscore', 'backbone', 'view/GameView', 'model/tiles',
 				
 				bindSwipe : function(){
 					var _this = this;
-					this.$el.swipe({
+					this.$el.find('.app').swipe({
 						swipe : function(event, direction){
 							var mapped = _this.keyMaps['swipe'+direction];
 							if(mapped){
